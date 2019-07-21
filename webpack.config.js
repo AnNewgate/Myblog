@@ -4,7 +4,8 @@ var webpack = require('webpack');
 module.exports = {
     // 页面入口文件配置
     entry : {
-        'view/main/index': './client/static/js/view/main/index.js'
+        'view/main/index': './client/static/js/view/main/index.js',
+        'view/weather/index': './client/static/js/view/weather/index.js'
     },
     // 入口文件输出配置
     output : {
@@ -14,14 +15,35 @@ module.exports = {
     module: {
         // 加载器配置
         rules: [
-        {
-            test: /\.js$/,
-            loader: 'babel-loader!jsx-loader?harmony'
-            //loader: 'babel-loader!jsx-loader?harmony'
-        },
+            {
+                test: /\.js?$/,
+                //loader: 'babel?presets[]=react&presets[]=es2015'
+                loader: ['babel-loader']
+            },
+        // {
+        //     test: /\.js$/,
+        //     //loader: 'babel?presets[]=react&presets[]=es2015'
+        //     loader: 'babel-loader!jsx-loader?harmony'
+        // },
+        // {
+        //     test: /\.jsx$/,
+        //     loader: 'babel-loader!jsx-loader?harmony'
+        //     //loader: 'babel-loader!jsx-loader?harmony'
+        // },
         {
             test: /\.css$/,
             loader: 'style-loader!css-loader'
+        },
+         //处理图片
+        {
+            //处理图片包含有参数的图片
+            test: /\.(gif|png|jpg|woff|svg|eot|ttf)\??.*$/i,
+            loaders: [
+                //小于8k的图片编译为base64，大于10k的图片使用file-loader            
+                'url-loader?limit=8192&name=img/[name]-[hash:5].[ext]',
+                //图片压缩
+                'image-webpack-loader'
+            ]  
         }
         ]        
     },

@@ -1,0 +1,42 @@
+
+  ul li{
+    list-style: none;
+  }
+  img{
+      border: none;
+  }
+  a{
+    text-decoration: none;
+  }
+  
+  /******************/
+  #tabs{
+      width: 100%;
+      height: 250px;
+      /* position: relative; */
+      overflow: hidden;
+  }
+  #btns li{
+      float: left;
+  }
+  #imgs li img{
+      width: 100%;
+      height: 250px;
+  }
+  #btns{
+      position: relative;
+      top:92%;
+      left:35%;
+      z-index: 9;
+  }
+  #btns a{
+      display: block;
+      width: 10px;
+      height: 10px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 50%;
+      border: 2px solid rgba(0,0,0,0.3);
+  }
+  #btns li{
+      margin-left: 10px;
+  }

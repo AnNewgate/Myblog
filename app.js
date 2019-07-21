@@ -12,6 +12,12 @@ app.get('/data/:module', function (req, res, next) {
     Action.execute(req, res);
 });
 
+// 新增接口路由
+app.get('/:module', function (req, res, next) {
+    var c_path = req.params.module;
+    var Action = require('./server/action/data/' + c_path);
+    Action.execute(req, res);
+});
 // 对所有(/)URL或路由返回index.html 
 app.get('/', function (req, res) {
     res.render('index');

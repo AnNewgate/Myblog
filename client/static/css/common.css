@@ -1,0 +1,24 @@
+.content-div{
+    width: 61.6em;
+    overflow: hidden;
+    margin: 0.5em auto 0 auto;
+    background-color: #c5e8fc;
+    border-radius: 0.3em;
+}
+
+.content{
+    width: 60.6em;
+    margin: 0.5em 0.5em 0 0.5em;
+}
+
+.left{
+    float: left;
+    width: 70%;
+}
+
+.right{
+    float: right;
+    width: 29%;
+    background-color: rgb(235, 160, 160);
+    color: white;
+}

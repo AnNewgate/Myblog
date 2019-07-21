@@ -1,0 +1,17 @@
+  html {
+    background-color: beige;
+  }
+
+  *{
+    margin:0;
+    padding: 0;
+  }
+  
+  body {
+    font: 14px "Century Gothic", Futura, sans-serif;
+  }
+  
+  .navbar{
+    width: 100%;
+    background-color: #272826;
+  }
