@@ -4,13 +4,16 @@ var webpack = require('webpack');
 module.exports = {
     // 页面入口文件配置
     entry : {
-        'view/main/index': './client/static/js/view/main/index.js',
+        'view/main/layout/index': './client/static/js/view/main/layout/index.js',
+        'view/main/index/index': './client/static/js/view/main/index/index.js',
+        'view/main/moodEssay/index': './client/static/js/view/main/moodEssay/index.js',
         'view/weather/index': './client/static/js/view/weather/index.js'
     },
     // 入口文件输出配置
     output : {
-        path : __dirname + '/client/static/output/js/',
-        filename : '[name].bundle.js'
+        path : __dirname + '/client/static/output/',
+        filename : 'js/[name].bundle.js',
+        publicPath : 'http://localhost:8080/client/static/output/'
     },
     module: {
         // 加载器配置
@@ -37,13 +40,24 @@ module.exports = {
          //处理图片
         {
             //处理图片包含有参数的图片
-            test: /\.(gif|png|jpg|woff|svg|eot|ttf)\??.*$/i,
+            test: /\.(gif|png|jpg|svg)\??.*$/i,
             loaders: [
                 //小于8k的图片编译为base64，大于10k的图片使用file-loader            
-                'url-loader?limit=8192&name=img/[name]-[hash:5].[ext]',
+                'url-loader?limit=8192&name=image/[name]-[hash:5].[ext]',
                 //图片压缩
                 'image-webpack-loader'
             ]  
+        },
+         //处理字体文件
+         { 
+             test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
+             loader: "url-loader?limit=10000&mimetype=application/font-woff&name=font/[name]-[hash:5].[ext]" 
+        },
+         {
+            test: /\.(ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+            loader: [
+                'url-loader?limit=10000&name=font/[name]-[hash:5].[ext]'
+            ]
         }
         ]        
     },

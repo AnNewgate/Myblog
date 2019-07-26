@@ -1,6 +1,7 @@
 import React from 'react';
 var ReactDOM = require('react-dom');
 var logo  = require('../../../image/logo.svg');
+import '../../../css/weather.css';
 
 class Weather extends React.Component{
     constructor(props) {

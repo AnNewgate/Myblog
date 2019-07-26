@@ -1,25 +1,31 @@
 var EventEmitter = require('events').EventEmitter;
  
-class Store_MessageList extends EventEmitter {
+class Store_ImgItemList extends EventEmitter {
     constructor() {
         super();
-        this.allData = null;
+        this.allItem = null;
         /*
        注意: 在派生的类中, 在你可以使用'this'之前, 必须先调用super()。
        忽略这, 这将导致引用错误。
        */
     }
 
-    getAllData(callback) {
+    getAllItem(callback) {
         var self = this;
         fetch(
-            "/data/getMessage/"
+            "/data/getImgItemList/"
+            // , {
+            //     headers : { 
+            //       'Content-Type': 'application/json',
+            //       'Accept': 'application/json'
+            //      }
+            //   }
         )
         .then(function(res) {
             if (res.ok) {
                 res.json().then(function(data) {
-                    self.allData = data;
-                    callback(self.allData);
+                    self.allItem = data;
+                    callback(self.allItem);
                 });
             } else {
                 console.log("Looks like the response wasn't perfect, got status", res.status);
@@ -30,4 +36,4 @@ class Store_MessageList extends EventEmitter {
     }
 }
  
-module.exports = new Store_MessageList();
+module.exports = new Store_ImgItemList();

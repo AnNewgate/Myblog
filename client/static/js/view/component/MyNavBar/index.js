@@ -1,4 +1,5 @@
 var React = require('react');
+import 'bootstrap/dist/css/bootstrap.min.css';
 var { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } =  require('reactstrap');
 
 class MyNavBar extends React.Component {
@@ -25,7 +26,7 @@ class MyNavBar extends React.Component {
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
               <NavItem>
-                <NavLink href="/home/">首页</NavLink>
+                <NavLink href="/index/">首页</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/moodEssay/">心情随笔</NavLink>
@@ -47,4 +48,4 @@ class MyNavBar extends React.Component {
   }
 }
 
-module.exports = new MyNavBar();
+export default MyNavBar;

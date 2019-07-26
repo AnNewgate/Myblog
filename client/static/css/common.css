@@ -1,7 +1,25 @@
+html {
+    background-color: beige;
+}
+
+*{
+    margin:0;
+    padding: 0;
+}
+  
+/* body {
+    font: 14px "Century Gothic", Futura, sans-serif;
+} */
+  
+.navbar{
+    width: 100%;
+    background-color: #272826;
+}
+
 .content-div{
     width: 61.6em;
     overflow: hidden;
-    margin: 0.5em auto 0 auto;
+    margin: 1em auto 1em auto;
     background-color: #c5e8fc;
     border-radius: 0.3em;
 }
