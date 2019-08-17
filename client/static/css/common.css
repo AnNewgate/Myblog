@@ -2,6 +2,11 @@ html {
     background-color: beige;
 }
 
+html::-webkit-scrollbar  
+{  
+    display: none;
+}
+
 *{
     margin:0;
     padding: 0;
@@ -14,10 +19,15 @@ html {
 .navbar{
     width: 100%;
     background-color: #272826;
+    /* color: #eaebe6; */
+}
+
+#pageContent{
+    margin: 1em auto 1em auto;
 }
 
 .content-div{
-    width: 61.6em;
+    width: 96%;
     overflow: hidden;
     margin: 1em auto 1em auto;
     background-color: #c5e8fc;
@@ -25,8 +35,9 @@ html {
 }
 
 .content{
-    width: 60.6em;
-    margin: 0.5em 0.5em 0 0.5em;
+    width: 98.7%;
+    margin: 0.5em;
+    overflow: hidden;
 }
 
 .left{
@@ -37,6 +48,41 @@ html {
 .right{
     float: right;
     width: 29%;
-    background-color: rgb(235, 160, 160);
     color: white;
 }
+
+.mail-ic, .qq-ic, .wc-ic, .git-ic{
+    display: inline-block;
+    width: 2.3em;
+    height: 2em;
+    margin: 0 2em;
+}
+
+.ant-back-top {
+    bottom: 100px;
+    /* color: #bfc2bb; */
+  }
+
+
+.ant-back-top-inner {
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    border-radius: 4px;
+    background-color: #1088e9;
+    color: #fff;
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .card-header{
+    color : black;
+ }
+
+ body{
+     font-size: 1rem !important;
+     background-color: transparent !important;
+ }
+ .ant-list-item-extra{
+     width: 30% !important;
+ }

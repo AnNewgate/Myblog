@@ -26,19 +26,19 @@ class MyNavBar extends React.Component {
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
               <NavItem>
-                <NavLink href="/index/">首页</NavLink>
+                <NavLink href="/client/index/">首页</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/moodEssay/">心情随笔</NavLink>
+                <NavLink href="/client/moodEssay/">心情随笔</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/techSharing/">技术分享</NavLink>
+                <NavLink href="/client/techSharing/">技术分享</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/timeLine/">时间轴</NavLink>
+                <NavLink href="/client/timeLine/">时间轴</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/hobbySharing/">爱好分享</NavLink>
+                <NavLink href="/client/hobbySharing/">爱好分享</NavLink>
               </NavItem>
             </Nav>
           </Collapse>

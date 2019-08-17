@@ -1,26 +1,30 @@
 var webpack = require('webpack');
-//const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
 
 module.exports = {
     // 页面入口文件配置
     entry : {
-        'view/main/layout/index': './client/static/js/view/main/layout/index.js',
-        'view/main/index/index': './client/static/js/view/main/index/index.js',
-        'view/main/moodEssay/index': './client/static/js/view/main/moodEssay/index.js',
-        'view/weather/index': './client/static/js/view/weather/index.js'
+        // 'client/view/main/layout/index': './client/static/js/view/main/layout/index.js',
+        // 'client/view/main/index/index': './client/static/js/view/main/index/index.js',
+        // 'client/view/main/moodEssay/index': './client/static/js/view/main/moodEssay/index.js',
+        // 'client/view/main/techSharing/index': './client/static/js/view/main/techSharing/index.js',
+        'client/view/main/timeLine/index': './client/static/js/view/main/timeLine/index.js',
+        // 'client/view/main/hobbySharing/index': './client/static/js/view/main/hobbySharing/index.js',
+        'client/view/main/articleLayout/index': './client/static/js/view/main/article/articleLayout.js',
+        // 'client/view/weather/index': './client/static/js/view/weather/index.js',
+        // 'admin/view/blogEdit/index': './admin/static/js/component/blogEdit.js'
     },
     // 入口文件输出配置
     output : {
-        path : __dirname + '/client/static/output/',
+        path : __dirname + '/output/',
         filename : 'js/[name].bundle.js',
-        publicPath : 'http://localhost:8080/client/static/output/'
+        publicPath : 'http://localhost:8080/output/'
     },
     module: {
         // 加载器配置
         rules: [
             {
                 test: /\.js?$/,
-                //loader: 'babel?presets[]=react&presets[]=es2015'
                 loader: ['babel-loader']
             },
         // {
@@ -40,7 +44,7 @@ module.exports = {
          //处理图片
         {
             //处理图片包含有参数的图片
-            test: /\.(gif|png|jpg|svg)\??.*$/i,
+            test: /\.(gif|png|jpg|svg|webp|ico)\??.*$/i,
             loaders: [
                 //小于8k的图片编译为base64，大于10k的图片使用file-loader            
                 'url-loader?limit=8192&name=image/[name]-[hash:5].[ext]',
@@ -64,37 +68,5 @@ module.exports = {
     // 其他解决方案配置
     resolve: {
         extensions: ['.js', '.jsx', '.css', '.json'],
-    },
-    // 插件项
-    // plugins : [
-    //     new webpack.optimize.UglifyJsPlugin({
-    //         compress: {
-    //             warnings: false,
-    //         },
-    //         output: {
-    //             comments: false,
-    //         },
-    //     }),
-    // ],
-    // optimization: {
-    //     minimizer: [
-    //     new UglifyJsPlugin({
-    //         sourceMap: true,
-    //         compress: {
-    //                warnings: false,
-    //         },
-    //     }),
-    //     ],
-    // },
-    // optimization: {
-    //     minimizer: [
-    //       new UglifyJsPlugin({
-    //         uglifyOptions: {
-    //           compress: {
-    //             drop_console: true,
-    //           }
-    //         }
-    //       })
-    //     ]
-    // }
+    }
 }

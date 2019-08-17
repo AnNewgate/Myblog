@@ -1,7 +1,7 @@
-var getMessageList = require("../../data/getImgItemList");
+var getImgItemList = require("../../data/getData");
  
 exports.execute = function (req, res) {
-     getMessageList.getImgItemList(function (data) {
+    getImgItemList.getImgItemList(function (data) {
          res.send(data);
      });
 };

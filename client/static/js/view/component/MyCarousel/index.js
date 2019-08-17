@@ -55,7 +55,6 @@ class MyCarousel extends Component {
       //   itemListArr[i] = data[i].Message;
       // }
       self.setState({items: itemListArr});
-      console.log(self.state.items);
       })
     }
 

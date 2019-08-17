@@ -1,4 +1,5 @@
 var EventEmitter = require('events').EventEmitter;
+var fetch = require("node-fetch");
  
 class Store_ImgItemList extends EventEmitter {
     constructor() {
@@ -25,6 +26,7 @@ class Store_ImgItemList extends EventEmitter {
             if (res.ok) {
                 res.json().then(function(data) {
                     self.allItem = data;
+                    //console.log(self.allItem);
                     callback(self.allItem);
                 });
             } else {
