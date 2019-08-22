@@ -8,11 +8,11 @@ module.exports = {
         // 'client/view/main/index/index': './client/static/js/view/main/index/index.js',
         // 'client/view/main/moodEssay/index': './client/static/js/view/main/moodEssay/index.js',
         // 'client/view/main/techSharing/index': './client/static/js/view/main/techSharing/index.js',
-        'client/view/main/timeLine/index': './client/static/js/view/main/timeLine/index.js',
+        // 'client/view/main/timeLine/index': './client/static/js/view/main/timeLine/index.js',
         // 'client/view/main/hobbySharing/index': './client/static/js/view/main/hobbySharing/index.js',
-        'client/view/main/articleLayout/index': './client/static/js/view/main/article/articleLayout.js',
+        // 'client/view/main/articleLayout/index': './client/static/js/view/main/article/articleLayout.js',
         // 'client/view/weather/index': './client/static/js/view/weather/index.js',
-        // 'admin/view/blogEdit/index': './admin/static/js/component/blogEdit.js'
+        'admin/view/blogEdit/index': './admin/static/js/component/blogEdit.js'
     },
     // 入口文件输出配置
     output : {

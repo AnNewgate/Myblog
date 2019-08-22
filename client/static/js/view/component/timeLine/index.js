@@ -4,13 +4,12 @@ const { Panel } = Collapse;
 var store = require('../../../store/common/TimeLine');
 
 const MyCollapse = ({years,yslist,onChange}) => {
-    console.log(years[0]);
     return(
-        <Collapse defaultActiveKey={[`${years[0]}`]} onChange={onChange}>
+        <Collapse defaultActiveKey={[years[0]]} onChange={onChange}>
             {
                 years.map((item) => {
                     return(
-                        <Panel showArrow={false} header={item} key={item}>
+                        <Panel showArrow={false} header={item} key={item+""}>
                             <Timeline>
                                 {
                                     yslist[item+""].map((timeitem) => {
@@ -88,6 +87,7 @@ class MyTimeLine extends React.Component{
     }
 
     render(){
+        console.log("开始xuanr");
         return(
             <div>
                 <style>

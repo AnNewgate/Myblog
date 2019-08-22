@@ -4,7 +4,8 @@ var url = require('url');
 exports.execute = function (req, res) {
     var params = url.parse(req.url, true).query;
     var artClass = params.artclass;
-    getBlogList.getBlogList(artClass,function (data) {
+    var category = params.category;
+    getBlogList.getBlogList(artClass, category, function (data) {
          res.send(data);
      });
 };

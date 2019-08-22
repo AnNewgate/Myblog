@@ -3,6 +3,7 @@ var fs = require('fs'); //文件模块
 
 const baseUrl = "http://localhost:8080/";
 
+// 对数据库连接进行了封装，可根据传入的sql语句返回查询数据
 function getDatabaseData(sql){
   return new Promise(function (resolve, reject) {
     mysqlconnect.getConnection(function (err, connection) {
@@ -14,9 +15,10 @@ function getDatabaseData(sql){
       connection.query(sql, function (err, result) {
         // And done with the connection.
         if (err) {
-          console.log('[SELECT ERROR] - ', err.message);
+          reject('[SELECT ERROR] - ' + err.message);
           return;
         }
+        //console.log(result);
         resolve(result);
         connection.release();
         // Don't use the connection here, it has been returned to the pool.
@@ -25,13 +27,15 @@ function getDatabaseData(sql){
   });
 }
 
+
+// 对文件读取进行了封装，可根据文件路径返回文件中的数据
 function getFileData(fileUrl){
   return new Promise(function(resolve,reject){
     //fileUrl为json文件的路径
     //读取json文件
     fs.readFile(fileUrl, 'utf-8', function (err, data) {
       if (err) {
-        console.log('[ReadFile ERROR] - ', err.message);
+        reject('[ReadFile ERROR] - ' + err.message);
         return;
       }
       //console.log(data);
@@ -46,19 +50,28 @@ exports.getImgItemList = function (callback) {
   var getImgItemListPromise = getFileData(file);
   getImgItemListPromise.then(function (data) {
     callback(data);
+  },function(mes){
+    console.log("getImgItemList "+mes);
   });
 };
 
 // 读取数据库，根据参数返回博文（还需要修改）
-exports.getBlogList = function (artClass,callback) {
+exports.getBlogList = function (artClass, category, callback) {
   const listData = [];
   var sql = "";
   if( artClass == -1){
-    sql = "SELECT `blogID`,`classID`,`blogTitle`,`blogAuthor`,`blogModifyTime`,`blogLikeNum`,`blogPageviews`,`blogCommentsNum`,`blogIntroduction`,`blogCover` FROM blogdetail";
+    sql = "SELECT `blogID`,`classID`,`blogTitle`,`blogIntroduction`,`blogCover` FROM artinfo ORDER BY blogStar DESC LIMIT 0,6";
   }else if(artClass == 0){
-    sql = "SELECT `blogID`,`classID`,`blogTitle`,`blogAuthor`,`blogModifyTime`,`blogLikeNum`,`blogPageviews`,`blogCommentsNum`,`blogIntroduction`,`blogCover` FROM blogdetail";
+    sql = "SELECT `blogID`,`classID`,`blogTitle`,`blogAuthor`,`blogModifyTime`,`blogLikeNum`,`blogPageviews`,`blogCommentsNum`,`blogIntroduction`,`blogCover` "
+     + "FROM blogdetail WHERE `blogStatus`=1 ORDER BY `blogModifyTime` DESC LIMIT 0,10";
   }else{
-    sql = "SELECT `blogID`,`classID`,`blogTitle`,`blogAuthor`,`blogModifyTime`,`blogLikeNum`,`blogPageviews`,`blogCommentsNum`,`blogIntroduction`,`blogCover` FROM blogdetail";
+    if(category == "按时间"){
+      sql = `SELECT blogID,classID,blogTitle,blogAuthor,blogModifyTime,blogLikeNum,blogPageviews,blogCommentsNum,blogIntroduction,blogCover "
+     + "FROM blogdetail WHERE classID=${artClass} ORDER BY blogModifyTime DESC`;
+    }else if(category == "按热度"){
+      sql = `SELECT blogID,classID,blogTitle,blogAuthor,blogModifyTime,blogLikeNum,blogPageviews,blogCommentsNum,blogIntroduction,blogCover "
+      + "FROM blogdetail WHERE classID=${artClass} ORDER BY blogStar DESC`;
+    }
   }
 
   let getBlogListPromise = getDatabaseData(sql);
@@ -81,6 +94,8 @@ exports.getBlogList = function (artClass,callback) {
       });
     }
     callback(listData);
+  },function(mes){
+    console.log("getBlogList " + mes);
   });
 };
 
@@ -90,12 +105,14 @@ exports.getBusinessCardInfo = function (callback) {
   var getBusinessCardInfoPromise = getFileData(file);
   getBusinessCardInfoPromise.then(function (data) {
     callback(data);
+  },function(mes){
+    console.log("getBusinessCardInfo " + mes);
   });
 };
 
 exports.getArticleList = function (callback) {
   const listData = [];
-  var sql = "SELECT `blogID`,`classID`,`blogTitle`,`blogAuthor`,`blogModifyTime` FROM blogdetail";
+  var sql = "SELECT `blogID`,`classID`,`blogTitle`,`blogAuthor`,`blogModifyTime` FROM `artinfo` ORDER BY `blogModifyTime`";
 
   let getArticleListPromise = getDatabaseData(sql);
   getArticleListPromise.then(function(result){
@@ -109,6 +126,8 @@ exports.getArticleList = function (callback) {
       });
     }
     callback(listData);
+  },function(mes){
+    console.log("getArticleList " + mes)
   });
 };
 
@@ -117,6 +136,8 @@ exports.getLinksList = function (callback) {
   var getLinksListPromise = getFileData(file);
   getLinksListPromise.then(function (data) {
     callback(data);
+  },function(mes){
+    console.log("getLinksList " + mes);
   });
 };
 
@@ -125,6 +146,8 @@ exports.getSiteInfo = function (callback) {
   var getSiteInfoPromise = getFileData(file);
   getSiteInfoPromise.then(function (data) {
     callback(data);
+  },function(mes){
+    console.log("getSiteInfo " + mes);
   });
 };
 
@@ -152,39 +175,77 @@ exports.getTimeLine = function (callback){
       });
     }
     callback(listData);
+  },function(mes){
+    console.log("getTimeLine " + mes);
   });
 }
 
-exports.getArt_Info = function (artClass,artId){
+exports.getArt_Info = function (artClass,artId,callback){
   const Art_Info = {};
-  var sql = "SELECT `blogID`,`classID`,`blogTitle`,`blogStatus`,`blogModifyTime` FROM blogdetail ORDER BY `blogModifyTime` DESC;";
-  var articleInfo = {
-    title: "这是测试文章",
-    art_class: "心情随笔",
-    art_classNum: 1,
-    content: `<p><strong>hahahahahaha</strong></p>`,
-    author: "chen",
-    time: "20190107",
-    tags: ["laji","putong","meishenme"],
-    likeNum: 3,
-    pre: {
-        link: "http://localhost:8080/article/0/1",
-        title: "测试文章的上一篇文章"
-    },
-    next: {
-        link: "http://localhost:8080/article/0/3",
-        title: "测试文章的下一篇文章"
-    }
-};
+  var sql = `SELECT blogID AS id,blogTitle AS title,className AS art_class,classID AS art_classNum,blogContent AS content,blogAuthor AS author,blogModifyTime AS time,blogLikeNum AS likeNum FROM artinfo WHERE classID=${artClass} AND blogID=${artId}`;
   
-  return articleInfo;
-}
-
-exports.getArt_Info1 = function (artClass,artId,callback){
-  const Art_Info = {};
-  var sql = "SELECT `blogID`,`classID`,`blogTitle`,`blogStatus`,`blogModifyTime` FROM blogdetail ORDER BY `blogModifyTime` DESC";
   let getArt_InfoPromise = getDatabaseData(sql);
   getArt_InfoPromise.then(function(result){
-    callback(result);
-  })
+    if(JSON.stringify(result) != '[]'){
+      let date = new Date(Date.parse(result[0].time));
+      Art_Info["id"] = result[0].id;
+      Art_Info["title"] = result[0].title;
+      Art_Info["art_class"] = result[0].art_class;
+      Art_Info["art_classNum"] = result[0].art_classNum;
+      Art_Info["content"] = result[0].content;
+      Art_Info["author"] = result[0].author;
+      Art_Info["time"] = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+      Art_Info["likeNum"] = result[0].likeNum;
+      var presql = `SELECT classID AS art_class,blogID AS art_blogID,blogTitle AS title FROM artinfo WHERE blogID = (SELECT blogID FROM artinfo WHERE classID = ${artClass} AND blogID < ${artId} ORDER BY blogID DESC LIMIT 1)`
+      let getPrePromise = getDatabaseData(presql);
+      getPrePromise.then(function (result) {
+        let pre = {};
+        if (JSON.stringify(result) != '[]') {
+          pre["link"] = baseUrl + `article/${result[0].art_class}/${result[0].art_blogID}`;
+          pre["title"] = result[0].title;
+        }else{
+          pre["link"] = baseUrl + `article/${artClass}/${artId}#`;
+          pre["title"] = "没有啦！";
+        }
+        Art_Info["pre"] = pre;
+        var nextsql = `SELECT classID AS art_class,blogID AS art_blogID,blogTitle AS title FROM artinfo WHERE blogID = (SELECT blogID FROM artinfo WHERE  classID = ${artClass} AND blogID > ${artId} ORDER BY blogID ASC LIMIT 1)`
+        let getNextPromise = getDatabaseData(nextsql);
+        getNextPromise.then(function (result) {
+          let next = {};
+          if (JSON.stringify(result) != '[]') {
+            next["link"] = baseUrl + `article/${result[0].art_class}/${result[0].art_blogID}`;
+            next["title"] = result[0].title;
+          }else{
+            next["link"] = baseUrl + `article/${artClass}/${artId}#`;
+            next["title"] = "没有啦！";
+          }
+          Art_Info["next"] = next;
+          var tagsql = `SELECT tagName as tag FROM blogtagstable RIGHT JOIN bloglabeltable ON blogtagstable.tagID=bloglabeltable.tagID WHERE bloglabeltable.blogID=${artId}`
+          let getTagPromise = getDatabaseData(tagsql);
+          getTagPromise.then(function(result){
+            let tags = [];
+            if (JSON.stringify(result) != '[]') {
+              for(let i = 0; i < result.length; i++){
+                tags.push(result[i].tag);
+              }
+            }else{
+              tags.push("空");
+            }
+            Art_Info["tags"] = tags;
+            callback(Art_Info);
+          },function(mes){
+            console.log("getArt_Info Fourth" + mes);
+          });
+        },function(mes){
+          console.log("getArt_Info Third" + mes);
+        });
+      },function(mes){
+        console.log("getArt_Info Second" + mes);
+      });
+    }else{
+      callback(Art_Info);
+    }
+  },function(mes){
+    console.log("getArt_Info First" + mes);
+  });
 }

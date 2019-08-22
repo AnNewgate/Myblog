@@ -82,7 +82,7 @@ class MyCarousel extends Component {
           {
             `.custom-tag {
                 max-width: 100%;
-                height: 300px;
+                height: 50%;
                 background: black;
               }
               .custom-tag img{

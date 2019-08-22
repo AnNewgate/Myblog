@@ -11,10 +11,10 @@ class Store_BlogList extends EventEmitter {
        */
     }
 
-    getAllItem(artclass,callback) {
+    getAllItem(artclass, category, callback) {
         var self = this;
         fetch(
-            `/data/getBlogList?artclass=${artclass}`
+            `/data/getBlogList?artclass=${artclass}&category=${category}`
             // , {
             //     headers : { 
             //       'Content-Type': 'application/json',

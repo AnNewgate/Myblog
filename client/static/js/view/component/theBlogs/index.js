@@ -8,36 +8,54 @@ const IconText = ({ type, text }) => (
         <Icon type={type} style={{ marginRight: 8 }} />
         {text}
     </span>
-    );
-const ClassMenu = ({menuitems}) => (
-        <Menu>
-            {
-                menuitems.map(item => {
-                    return(
-                    <Menu.Item>
-                        <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-                            {item}
-                        </a>
-                    </Menu.Item>);
-                })
-            }
-        </Menu>
-    );
+);
+
+// const ClassMenu = ({ menuitems, reloadData, articleClass }) => (
+//     <Menu>
+//         {
+//             menuitems.map((item, index) => {
+//                 return (
+//                     <Menu.Item key={index}>
+//                         <a onClick={reloadData(articleClass, this)}>
+//                             {item}
+//                         </a>
+//                     </Menu.Item>);
+//             })
+//         }
+//     </Menu>
+// );
     
 class TheBlog extends React.Component{
     constructor(props){
         super(props);
         this.state = {listData: [], menuitems: []};
         this.getData(this.props.blogClass);
+        this.reloadData = this.reloadData.bind(this);
     }
 
     getData(articleClass){
         var self = this;
-        store.getAllItem(articleClass,function (data) {
-        var itemListArr = data;
-        var menuitems = ["按热度", "按时间"];
-        self.setState({listData: itemListArr,menuitems : menuitems});
-      })
+        store.getAllItem(articleClass,"按时间",function (data) {
+            var itemListArr = data;
+            var menuitems = ["按时间", "按热度"];
+            self.setState({ listData: itemListArr, menuitems: menuitems });
+      });
+    }
+
+    reloadData(event){
+        var self = this;
+        event = event.nativeEvent;
+        const tr = event.target;
+        let category = tr.innerHTML;
+        let articleClass = self.props.blogClass;
+        var menuitems = self.state.menuitems;
+        store.getAllItem(articleClass,category,function(data){
+            var itemListArr = data;
+            var temp = menuitems[0];
+            menuitems[0] = menuitems[1];
+            menuitems[1] = temp;
+            self.setState({ listData: itemListArr, menuitems: menuitems });
+        })
     }
 
     render(){
@@ -83,9 +101,19 @@ class TheBlog extends React.Component{
             return (
                 <Card title={this.props.title}
                     extra={
-                        <Dropdown overlay={<ClassMenu menuitems={this.state.menuitems}/>} >
-                            <a className="ant-dropdown-link" href="#">{this.state.menuitems[0]} <Icon type="down" /></a>
-                            </Dropdown>
+                        <Dropdown 
+                        overlay={<Menu>{
+                                this.state.menuitems.map((item, index) => {
+                                    return(
+                                    <Menu.Item key={index}>
+                                        <a onClick={this.reloadData}>
+                                            {item}
+                                        </a>
+                                    </Menu.Item>);
+                                })
+                            }</Menu>} >
+                        <a className="ant-dropdown-link" >{this.state.menuitems[0]} <Icon type="down" /></a>
+                        </Dropdown>
                     }
                     style={{ width: "100%", marginTop: "1em" }}>
                     <List

@@ -10,6 +10,8 @@
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="stylesheet" href="/client/static/css/common.css" type="text/css"/>
+    <link rel="stylesheet" href="/client/static/css/article.css" type="text/css"/>
+    <script async="async" src="/client/static/js/event.js"></script>
     <title><%= title %></title>
   </head>
   <body>
@@ -24,8 +26,10 @@
       </div>
       <div id="footer">
       </div>
+      <div id="message" style="display: none;">
+        <span style="display: block; margin: 3% 3%">您已经点过赞啦！谢谢您的再次肯定！</span>
+      </div>
     </div>
     <script src="/output/js/client/view/main/articleLayout/index.bundle.js"></script>
-    <!-- <script src="/client/static/output/js/view/main/article/index.bundle.js"></script> -->
   </body>
 </html>

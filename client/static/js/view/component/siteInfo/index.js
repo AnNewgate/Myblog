@@ -13,7 +13,6 @@ class SiteInfo extends React.Component{
         var self = this;
         store.getAllItem(function (data) {
         var itemListArr = data;
-        console.log(data);
         self.setState({ siteinfo: itemListArr });
       })
     }

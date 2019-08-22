@@ -9,22 +9,24 @@ class BlogEdit extends React.Component{
 
     render(){
         return(
-            <Editor config={
-                {
-                    markdown: // testEditor.getMarkdown().replace(/`/g, '\\`')
-                    `## Test
+            <div>
+                <Editor config={
+                    {
+                        markdown: // testEditor.getMarkdown().replace(/`/g, '\\`')
+                            `## Test
                     \`\`\`
                     console.log('what can i do for you')
                     \`\`\`
                     
                     # 123123`,
-                    onload: (editor, func) => {
-                        let md = editor.getMarkdown();
-                        let html = editor.getHTML();
-                        debugger
+                        onload: (editor, func) => {
+                            let md = editor.getMarkdown();
+                            let html = editor.getHTML();
+                            debugger
+                        }
                     }
-                }
-            }/>
+                } />
+            </div>
         );
     }
 }

@@ -12,7 +12,7 @@ class IndexContent extends React.Component{
             <div className="content-div">
                 <div className="content">
                     <div className="left">
-                    <MyBlog blogClass={1} title={"技术分享"}></MyBlog>
+                    <MyBlog blogClass={2} title={"技术分享"}></MyBlog>
                     </div>
                     <div className="right">
                     <ArticleList></ArticleList>
