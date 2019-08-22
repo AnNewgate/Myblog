@@ -1,2 +1,0 @@
-var data = {"years":["2019","2016","2013"],"2019y":[{"blogid":1,"href":"http://localhost:8080/article/2/1","title":"今天来点简单的","status":"green","time":"2019-08-09T02:42:38.000Z"}],"2016y":[{"blogid":2,"href":"http://localhost:8080/article/1/2","title":"今天来点简单的2","status":"red","time":"2016-08-11T02:30:13.000Z"}],"2013y":[{"blogid":3,"href":"http://localhost:8080/article/1/3","title":"123456","status":"red","time":"2013-08-11T06:33:18.000Z"}]};
-console.log(JSON.stringify(data));
