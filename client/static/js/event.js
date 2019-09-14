@@ -51,6 +51,8 @@ function addLikeNum(){
         }
     };
 
+    likeNum = null;
+    num = null;
     var url = "/action/addLikeNum";
     // 为url添加参数
     url = addURLParam(url, "art_class", artInfo[0]);

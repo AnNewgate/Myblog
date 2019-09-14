@@ -13,8 +13,22 @@ app.get('/action/:module', function (req, res) {
     Action.execute(req, res);
 });
 
+// 数据修改接口路由
+app.post('/action/:module', function (req, res) {
+    var c_path = req.params.module;
+    var Action = require('./server/action/' + c_path);
+    Action.execute(req, res);
+});
+
 // 新增数据接口路由
 app.get('/data/:module', function (req, res, next) {
+    var c_path = req.params.module;
+    var Action = require('./server/action/data/' + c_path);
+    Action.execute(req, res);
+});
+
+// 新增数据接口路由
+app.post('/data/:module', function (req, res) {
     var c_path = req.params.module;
     var Action = require('./server/action/data/' + c_path);
     Action.execute(req, res);
@@ -45,9 +59,9 @@ app.get('/client/:view', function (req, res, next) {
     var viewname = req.params.view;
     res.render(path.join('client/view/',viewname));
 });
-app.get('/admin/:view', function (req, res, next) {
-    var viewname = req.params.view;
-    res.render(path.join('admin/view/',viewname));
+app.get('/admin', function (req, res, next) {
+    //var viewname = req.params.view;
+    res.render(path.join('admin/view/','index'));
 });
 
 // 对所有(/)URL或路由返回index.html 

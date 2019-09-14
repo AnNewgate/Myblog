@@ -38,4 +38,4 @@ class Store_ImgItemList extends EventEmitter {
     }
 }
  
-module.exports = new Store_ImgItemList();
+export default new Store_ImgItemList();

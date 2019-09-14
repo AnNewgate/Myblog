@@ -38,4 +38,4 @@ class Store_SiteInfo extends EventEmitter {
     }
 }
  
-module.exports = new Store_SiteInfo();
+export default new Store_SiteInfo();

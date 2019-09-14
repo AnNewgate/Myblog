@@ -1,0 +1,19 @@
+.header{
+    width: 100vw;
+    height: 10vh;
+    background-color: aquamarine;
+    border-bottom: 1vh solid black; 
+    font-size: 0.5rem;
+}
+
+.ant-tabs{
+    width: 100vw;
+    height: 100vh;
+}
+
+.ant-tabs-left-bar{
+    width: 8vw;
+    height: 100vh;
+    border-right: solid black;
+    text-align: center;
+}

@@ -1,7 +1,7 @@
 var React = require('react');
 import { Timeline, Collapse } from 'antd';
 const { Panel } = Collapse;
-var store = require('../../../store/common/TimeLine');
+import store from '../../../store/common/TimeLine';
 
 const MyCollapse = ({years,yslist,onChange}) => {
     return(

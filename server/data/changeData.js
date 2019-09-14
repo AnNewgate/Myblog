@@ -1,7 +1,7 @@
 var mysqlconnect = require('../../database/database').mysqlconnect;// 实例化数据库对象
 var fs = require('fs'); //文件模块
 
-// 对数据库连接进行了封装，可根据传入的sql语句返回查询数据
+// 对数据库连接进行了封装，可根据传入的sql语句进行增删改
 function changeDatabaseData(sql){
   return new Promise(function (resolve, reject) {
     mysqlconnect.getConnection(function (err, connection) {
@@ -25,23 +25,6 @@ function changeDatabaseData(sql){
   });
 }
 
-
-// 对文件读取进行了封装，可根据文件路径返回文件中的数据
-function getFileData(fileUrl){
-  return new Promise(function(resolve,reject){
-    //fileUrl为json文件的路径
-    //读取json文件
-    fs.readFile(fileUrl, 'utf-8', function (err, data) {
-      if (err) {
-        reject('[ReadFile ERROR] - ' + err.message);
-        return;
-      }
-      //console.log(data);
-      resolve(data);
-    });
-  });
-}
-
 exports.addLikeNum = function (artId, ip, callback) {
     var sql = `SELECT blogID,likeIP FROM likerecord WHERE blogID=${artId} AND likeIP="${ip}"`;
 
@@ -58,18 +41,28 @@ exports.addLikeNum = function (artId, ip, callback) {
                 upDatePromise.then(function(result){
                     var message = {};
                     message["Code"] = 1;
+                    message["Mes"] = "";
                     callback(message);
                 });
             },function(mes){
+                var message = {};
+                message["Code"] = 0;
+                message["Mes"] = "插入点赞记录失败！";
                 console.log("addLikeNum " + mes);
+                callback(message);
             });
         }else{
             var message = {};
             message["Code"] = 0;
+            message["Mes"] = "已有点赞记录";
             callback(message);
         }
     }, function (mes) {
         console.log("selectLikeRecord " + mes)
+        var message = {};
+        message["Code"] = 0;
+        message["Mes"] = "查询点赞记录出错";
+        callback(message);
     });
 };
 
@@ -78,8 +71,8 @@ exports.addPageviewNum= function (artId) {
 
     let addPageviewNumPromise = changeDatabaseData(sql);
     addPageviewNumPromise.then(function (result) {
-        console.log("successful");
+        console.log("addPageviewNum successful");
     }, function (mes) {
-        console.log("addPageviewNum " + mes)
+        console.log("addPageviewNum " + mes);
     });
 };

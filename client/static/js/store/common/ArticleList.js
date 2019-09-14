@@ -37,4 +37,4 @@ class Store_ArticleList extends EventEmitter {
     }
 }
  
-module.exports = new Store_ArticleList();
+export default new Store_ArticleList();

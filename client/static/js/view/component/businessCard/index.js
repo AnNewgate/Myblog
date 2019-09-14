@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardHeader, CardBody, CardText, UncontrolledTooltip, Button } from 'reactstrap';
 import classNames from 'classnames';
-var store = require('../../../store/common/BusinessCardInfo');
+import store from '../../../store/common/BusinessCardInfo';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 
@@ -121,7 +121,7 @@ class BusinessCard extends React.Component {
           <CardHeader><strong>我的名片</strong></CardHeader>
           <CardBody>
             <CardText>姓名：{this.state.cardInfo.name}<Button outline color="primary" style={{ width: "5em", height: "1.5em", padding: "0em", lineHeight: "1.5em" }}>
-              <a style={{ textDecoration: "none" }} href="http://localhost:8080/article/4/0">了解我</a></Button>{' '}</CardText>
+              <a style={{ textDecoration: "none" }} href="http://localhost:8080/article/4/1">了解我</a></Button>{' '}</CardText>
             <CardText>职业：{this.state.cardInfo.career}</CardText>
             <CardText>现居：{this.state.cardInfo.living}</CardText>
             <CardText>Email: {this.state.cardInfo.email}</CardText>

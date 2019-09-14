@@ -2,7 +2,7 @@ import React from 'react';
 var ReactDOM = require('react-dom');
 var logo  = require('../../../../../images/blog/weatherImg/default.jpg');
 import '../../../css/weather.css';
-var store = require('../../store/main/weather');
+import store from '../../store/main/weather';
 
 const WeatherDiv = (props) => {
     let info = props.info;
@@ -39,13 +39,11 @@ class Weather extends React.Component{
 
     getWeatherInfo(){
         var self = this;
-        
         store.getWeatherInfo(function(data){
             if(data.weather_img != "" && data.weather_img != undefined){
-                var weatherImg = data.weather_img;
                 self.setState({
                     weather_info: data,
-                    weatherImg: weatherImg
+                    weatherImg: data.weather_img
                 });
             }else{
                 self.setState({

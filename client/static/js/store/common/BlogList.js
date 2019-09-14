@@ -37,4 +37,4 @@ class Store_BlogList extends EventEmitter {
     }
 }
  
-module.exports = new Store_BlogList();
+export default new Store_BlogList();

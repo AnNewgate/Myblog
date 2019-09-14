@@ -1,7 +1,7 @@
 import React from 'react';
 import { List } from 'antd';
 // import 'antd/dist/antd.css';
-var store = require('../../../store/common/LinkList');
+import store from '../../../store/common/LinkList';
 
 class LinkList extends React.Component{
     constructor(props){

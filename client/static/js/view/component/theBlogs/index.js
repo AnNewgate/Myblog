@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, Menu, Icon, Card, Dropdown } from 'antd';
 // import 'antd/dist/antd.css';
-var store = require('../../../store/common/BlogList');
+import store from '../../../store/common/BlogList';
 
 const IconText = ({ type, text }) => (
     <span>

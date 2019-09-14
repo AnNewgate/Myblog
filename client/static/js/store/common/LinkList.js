@@ -37,4 +37,4 @@ class Store_LinkList extends EventEmitter {
     }
 }
  
-module.exports = new Store_LinkList();
+export default new Store_LinkList();

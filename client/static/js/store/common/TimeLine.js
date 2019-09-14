@@ -54,4 +54,4 @@ class Store_TimeLine extends EventEmitter {
     // }
 }
  
-module.exports = new Store_TimeLine();
+export default new Store_TimeLine();

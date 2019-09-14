@@ -3,6 +3,9 @@ const http = require('http');
 var cheerio = require("cheerio");
 
 function getWeatherImgPromise(q) {
+    if(q==""){
+        q="广州";
+    }
     var url = "http://www.ivsky.com/search.php?q=" + q;
     var getWeatherImgPromise = new Promise(function (resolve, reject) {
         http.get(url, function (res) {
@@ -14,7 +17,7 @@ function getWeatherImgPromise(q) {
                 var $ = cheerio.load(data);
                 var imgSrc = [];
                 var imgs = $("img");
-                for (let i = 0; i < 3; i++) {
+                for (let i = 0; i < 9; i++) {
                     imgSrc.push(imgs[i].attribs.src);
                 }
                 resolve(imgSrc);
@@ -36,9 +39,9 @@ function getClientIP(req) {
 
 function getClientCity(clientIp) {
     var cityinfo = {};
-    clientIp = "148.70.10.107";
+    let key = "5mAXylRo6iSK6dvcMsKeSpqEpLKMOx3p";
     var getClientCityPromise = new Promise(function (resolve, reject) {
-        http.get(`http://ip.taobao.com/service/getIpInfo.php?ip=${clientIp}`, (resp) => {
+        http.get(`http://api.map.baidu.com/location/ip?ip=${clientIp}&ak=${key}&coor=bd09ll`, (resp) => {
             let data = '';
             // A chunk of data has been recieved.
             resp.on('data', (chunk) => {
@@ -51,9 +54,9 @@ function getClientCity(clientIp) {
                     if (data == '') {
                         reject(cityinfo);
                     } else {
-                        if (JSON.parse(data).code == 0) {
-                            cityinfo["city_name"] = JSON.parse(data).data.city;
-                            cityinfo["city_id"] = JSON.parse(data).data.city_id;
+                        if (JSON.parse(data).status == 0) {
+                            cityinfo["city_name"] = JSON.parse(data).content.address_detail.city;
+                            cityinfo["city_id"] = JSON.parse(data).content.address_detail.city_code;
                         }
                         resolve(cityinfo);
                     }
@@ -72,9 +75,9 @@ function getClientCity(clientIp) {
     return getClientCityPromise;
 }
 
-function getWeatherInfo(cityname) {
-    var key = "SKPgMcE6nHXYVTieP";
-    let url = `https://api.seniverse.com/v3/weather/now.json?key=${key}&location=${cityname}&language=zh-Hans&unit=c`;
+function getWeatherInfo(ip) {
+    var key = "SKPgMcE6nHXYVTieP"; // 心知天气的API，https://www.seniverse.com/
+    let url = `https://api.seniverse.com/v3/weather/now.json?key=${key}&location=${ip}&language=zh-Hans&unit=c`;
     var getWeatherInfoPromise = new Promise(function (resolve, reject) {
         https.get(url, (resp) => {
             let data = '';
@@ -97,7 +100,8 @@ function getWeatherInfo(cityname) {
 exports.execute = function (req, res) {
     var weatherInfo = {};
     var city = {};
-    var ip = getClientIP(req);
+    //var ip = getClientIP(req);
+    var ip = "148.70.10.107";
     var cityPromise = getClientCity(ip);
     cityPromise.then(function (result) {
         city = result;
@@ -107,8 +111,9 @@ exports.execute = function (req, res) {
         } else {
             var weatherImgPromise = getWeatherImgPromise(city["city_name"]);
             weatherImgPromise.then(function (result) {
-                weatherInfo["weather_img"] = result[0];
-                var weatherInfoPromise = getWeatherInfo(city["city_name"]);
+                let i = Math.floor(Math.random()*10);
+                weatherInfo["weather_img"] = result[i];
+                var weatherInfoPromise = getWeatherInfo(ip);
                 weatherInfoPromise.then(function (result) {
                     weatherInfo["code"] = 0;
                     weatherInfo["now"] = result.results[0].now;

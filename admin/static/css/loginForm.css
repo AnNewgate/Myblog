@@ -1,0 +1,32 @@
+.login-form-container{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+}
+
+.mask{
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.login-form-box {
+    max-width: 40vw;
+    margin: auto;
+    background-color: beige;
+    opacity: initial;
+    padding: 5%;
+    border-radius: 3%;
+}
+
+.login-form{
+    max-width: 40vw;
+}
+
+.login-form-forgot {
+    float: right;
+}
+
+.login-form-button {
+    width: 100%;
+}

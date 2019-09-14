@@ -1,7 +1,7 @@
 var EventEmitter = require('events').EventEmitter;
 var fetch = require("node-fetch");
  
-class Store_BlogList extends EventEmitter {
+class Store_BusinessCardInfo extends EventEmitter {
     constructor() {
         super();
         this.allItem = null;
@@ -14,7 +14,7 @@ class Store_BlogList extends EventEmitter {
     getAllItem(callback) {
         var self = this;
         fetch(
-            `/data/getBuninessCardInfo`
+            `/data/getBusinessCardInfo`
             // , {
             //     headers : { 
             //       'Content-Type': 'application/json',
@@ -37,4 +37,4 @@ class Store_BlogList extends EventEmitter {
     }
 }
  
-module.exports = new Store_BlogList();
+export default new Store_BusinessCardInfo();

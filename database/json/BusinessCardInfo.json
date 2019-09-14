@@ -1,9 +1,1 @@
-{
-    "name" : "Duve Chen",
-    "career" : "前端开发工程师",
-    "living" : "广东省广州市",
-    "email" : "duvechen@163.com",
-    "qq_img" : "http://localhost:8080/images/images/banner1.webp",
-    "wx_img" : "http://localhost:8080/images/images/banner2.webp",
-    "git_href" : "https://github.com/AnNewgate"
-}
+{"name":"Duve Chen","career":"前端开发工程师","living":"广东省广州市","email":"duvechen@163.com","git_href":"https://github.com/AnNewgate","qq_img":"images\\images\\jLwLYu6KwG6Lw1nLqPRqBEs0.jpg","wx_img":"images\\images\\Ncm5XrxTH_0k9PP9Y5BPEcV7.jpg"}

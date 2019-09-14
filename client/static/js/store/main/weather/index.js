@@ -32,4 +32,4 @@ class Store_WeatherInfo extends EventEmitter {
     }
 }
  
-module.exports = new Store_WeatherInfo();
+export default new Store_WeatherInfo();

@@ -1,7 +1,7 @@
 import React from 'react';
 import {  Card, Col, Row } from 'antd';
 // import 'antd/dist/antd.css';
-var store = require('../../../store/common/BlogList');
+import store from '../../../store/common/BlogList';
 
 const { Meta } = Card;
     
@@ -16,11 +16,9 @@ class SpecialRecom extends React.Component{
         var self = this;
         store.getAllItem(articleClass,"按热度",function (data) {
             var itemListArr1 = [], itemListArr2 = [];
-            for(let i = 0; i < data.length/2; i++){
-                itemListArr1.push(data[i]);
-            }
-            for(let i = data.length/2; i < data.length; i++){
-                itemListArr2.push(data[i]);
+            for(let i = 0; i < data.length; i++){
+                if(i < 3) itemListArr1.push(data[i]);
+                else itemListArr2.push(data[i]);
             }
             self.setState({listData1: itemListArr1, listData2: itemListArr2});
       })

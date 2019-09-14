@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody, CardText, CardImg, CardHeader } from 'reactstrap';
-var store = require('../../../store/common/SiteInfo');
+import store from '../../../store/common/SiteInfo';
 
 class SiteInfo extends React.Component{
     constructor(props){

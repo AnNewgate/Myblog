@@ -13,7 +13,7 @@ var pool  = mysql.createPool({
     host     : 'localhost',
     user     : 'root',
     password : 'root12345',
-    database : 'myblog'
+    database : 'myblog',
 });
 
 // exports.mysqlconnect = connection;

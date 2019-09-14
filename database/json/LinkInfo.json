@@ -1,14 +1,1 @@
-[
-    {
-        "name": "1",
-        "src": "http://www.baidu.com"
-    },
-    {
-        "name": "1",
-        "src": "http://www.baidu.com"
-    },
-    {
-        "name": "1",
-        "src": "http://www.baidu.com"
-    }
-]
+[{"key":"1","name":"百度","src":"http://www.baidu.com"},{"key":"2","name":"必应","src":"https://cn.bing.com"},{"key":"3","name":"GitHub","src":"https://github.com/"}]

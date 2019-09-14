@@ -6,7 +6,7 @@ import {
   CarouselIndicators,
   CarouselCaption
 } from 'reactstrap';
-var store = require('../../../store/main/index/ItemList');
+import store from '../../../store/main/index/ItemList';
 
 class MyCarousel extends Component {
   constructor(props) {
@@ -66,7 +66,7 @@ class MyCarousel extends Component {
         <CarouselItem
           className="custom-tag"
           tag="div"
-          key={item.id}
+          key={item.key}
           onExiting={this.onExiting}
           onExited={this.onExited}
         >
@@ -87,7 +87,7 @@ class MyCarousel extends Component {
               }
               .custom-tag img{
                 width: 100%;
-                height: 100%;
+                height: 350px;
               }
               .carousel-caption {
                 background: transparent;
