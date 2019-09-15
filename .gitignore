@@ -1,6 +1,5 @@
 node_modules
-beaimages
 database/myblog.sql
-images/images
+images
 package-lock.json
 server/rsa
