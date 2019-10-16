@@ -92,6 +92,6 @@ server文件中的action文件为接口文件，action中的子文件夹data文�
 4. 后台代码存在一定的重复性，需要进行抽离封装
 
 ### 七、联系我
-此项目属于本人联系项目，也存在挺多问题的，如果读者发现有新的问题，希望您能给我反馈，帮助我改进，谢谢！
+此项目属于本人练习项目，也存在挺多问题，如果读者发现有新的问题，希望您能给我反馈，帮助我改进，谢谢！
 ![QQ二维码](https://note.youdao.com/yws/public/resource/d5b9d6638b2c544141451d0c0feb3224/xmlnote/0040221F2A414FA4A6C9DC04D5707F4C/2325)  
 ![微信二维码](https://note.youdao.com/yws/public/resource/d5b9d6638b2c544141451d0c0feb3224/xmlnote/7F681D65D3954A1AB585A20F70968D33/2327)
